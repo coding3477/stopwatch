@@ -31,6 +31,7 @@ function CountdownTimer() {
             stopwatch_timer = window.setInterval(StopwatchTimer, 1000);
             state = "started";
             document.getElementById("start_stop").innerText = "Stop";
+            document.getElementById("start_stop").disabled = false;
         }, 1000);
 
         
@@ -89,6 +90,7 @@ function fillZero(width, str) {
 document.getElementById("start_stop").addEventListener("click", function () {
     if(state=="init") {
         countdown_timer = window.setInterval(CountdownTimer, 1000);
+        this.disabled = true;
     }
     else if (state == "stopped") {
         stopwatch_timer = window.setInterval(StopwatchTimer, 1000);
@@ -103,10 +105,19 @@ document.getElementById("start_stop").addEventListener("click", function () {
 });
 
 document.getElementById("reset").addEventListener("click", function () {
-    window.clearInterval(stopwatch_timer);
+    init();
+});
+
+function init() {
     state = "init";
+    
+    window.clearInterval(stopwatch_timer);
+    window.clearInterval(countdown_timer);
     stopwatch_timer = null;
+    countdown_timer = null;
+    
     document.getElementById("start_stop").innerText = "Start";
+    document.getElementById("start_stop").disabled = false;
 
     document.getElementById("hh").textContent = "00";
     document.getElementById("mm").textContent = "00";
@@ -116,4 +127,4 @@ document.getElementById("reset").addEventListener("click", function () {
     mm = 0;
     ss = 0;
     count_down = 5;
-});
+}
