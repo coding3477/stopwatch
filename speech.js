@@ -15,7 +15,7 @@ function speak(text, opt_prop) {
     speechMsg.text = text
 
     // SpeechSynthesisUtterance에 저장된 내용을 바탕으로 음성합성 실행
-    //window.speechSynthesis.speak(speechMsg)
+    window.speechSynthesis.speak(speechMsg)
 }
 
 /*

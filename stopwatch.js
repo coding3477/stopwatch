@@ -1,12 +1,43 @@
 let hh = 0;
 let mm = 0;
 let ss = 0;
-let timer = null;
-let state = "stopped";
+let stopwatch_timer = null;
+let countdown_timer = null;
+let state = "init";
+let count_down = 5;
 
-//window.setInterval(IntervalHandler, 1000);
+function CountdownTimer() {
+    speak(count_down, {
+        rate: 1,
+        pitch: 1.2,
+        lang: "ko-KR"
+    })
 
-function IntervalHandler() {
+    count_down--;
+
+    if(count_down==0) {
+
+        window.setTimeout(function() {
+            speak("시 작", {
+                rate: 1,
+                pitch: 1.2,
+                lang: "ko-KR"
+            })
+    
+            window.clearInterval(countdown_timer);
+            countdown_timer = null;
+            count_down = 0;
+    
+            stopwatch_timer = window.setInterval(StopwatchTimer, 1000);
+            state = "started";
+            document.getElementById("start_stop").innerText = "Stop";
+        }, 1000);
+
+        
+    }
+}
+
+function StopwatchTimer() {
     ss++;
 
     if (ss == 60) {
@@ -23,30 +54,17 @@ function IntervalHandler() {
     text = "";
     if (hh != 0) {
         text += hh
-        if (hh == 1) {
-            text += "hour";
-        } else {
-            text += "hours";
-        }
-
+        text += "시간";
     }
 
     if (mm != 0) {
         text += mm
-        if (mm == 1) {
-            text += "minute";
-        } else {
-            text += "minutes";
-        }
+        text += "분";
     }
 
     if (ss != 0) {
         text += ss
-        if (ss == 1) {
-            text += "second";
-        } else {
-            text += "seconds";
-        }
+        text += " 초";
     }
 
     //text = hh+":"+mm+":"+ss;
@@ -55,7 +73,7 @@ function IntervalHandler() {
         speak(text, {
             rate: 1,
             pitch: 1.2,
-            lang: "en-US"
+            lang: "ko-KR"
         })
     }
 
@@ -69,22 +87,25 @@ function fillZero(width, str) {
 }
 
 document.getElementById("start_stop").addEventListener("click", function () {
-    if (state == "stopped") {
-        timer = window.setInterval(IntervalHandler, 1000);
+    if(state=="init") {
+        countdown_timer = window.setInterval(CountdownTimer, 1000);
+    }
+    else if (state == "stopped") {
+        stopwatch_timer = window.setInterval(StopwatchTimer, 1000);
         state = "started";
         this.innerText = "Stop";
     } else {
-        window.clearInterval(timer);
+        window.clearInterval(stopwatch_timer);
         state = "stopped";
-        timer = null;
+        stopwatch_timer = null;
         this.innerText = "Start";
     }
 });
 
 document.getElementById("reset").addEventListener("click", function () {
-    window.clearInterval(timer);
-    state = "stopped";
-    timer = null;
+    window.clearInterval(stopwatch_timer);
+    state = "init";
+    stopwatch_timer = null;
     document.getElementById("start_stop").innerText = "Start";
 
     document.getElementById("hh").textContent = "00";
@@ -94,4 +115,5 @@ document.getElementById("reset").addEventListener("click", function () {
     hh = 0;
     mm = 0;
     ss = 0;
+    count_down = 5;
 });
