@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Roboto&display=swap" rel="stylesheet">
     <script src="speech.js"></script>
     <script src="stopwatch.js"></script>
     <title>Stopwatch</title>
 </head>
 <body>
-    <div class="display">
-        <span id="hh">00</span>:<span id="mm">00</span>:<span id="ss">00</span>
+    <div class="stopwatch">
+        <div class="display">
+            <span id="hh">00</span>:<span id="mm">00</span>:<span id="ss">00</span>
+        </div>
+        <div class="control">
+            <button id="start_stop">Start</button>
+            <button id="reset">Reset</button>
+        </div>
     </div>
 </body>
 </html>
