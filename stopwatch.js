@@ -57,7 +57,11 @@ function IntervalHandler() {
         })
     }
 
-    document.getElementById("hh").textContent = hh.toString().padStart(2,'0');
-    document.getElementById("mm").textContent = mm.toString().padStart(2,'0');
-    document.getElementById("ss").textContent = ss.toString().padStart(2,'0');
+    document.getElementById("hh").textContent = fillZero(2, hh.toString());
+    document.getElementById("mm").textContent = fillZero(2, mm.toString());
+    document.getElementById("ss").textContent = fillZero(2, ss.toString());
+}
+
+function fillZero(width, str){
+    return str.length >= width ? str:new Array(width-str.length+1).join('0')+str;
 }
