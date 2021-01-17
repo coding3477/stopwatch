@@ -19,34 +19,31 @@ function IntervalHandler() {
 
     // 1 hour 23 minutes 45 seconds
     text = "";
-    if(hh!=0) {
+    if (hh != 0) {
         text += hh
-        if(hh==1) {
-            text += "hour";    
+        if (hh == 1) {
+            text += "hour";
+        } else {
+            text += "hours";
         }
-        else {
-            text += "hours";    
-        }
-        
+
     }
 
-    if(mm!=0) {
+    if (mm != 0) {
         text += mm
-        if(mm==1) {
-            text += "minute";    
-        }
-        else {
-            text += "minutes";    
+        if (mm == 1) {
+            text += "minute";
+        } else {
+            text += "minutes";
         }
     }
 
-    if(ss!=0) {
+    if (ss != 0) {
         text += ss
-        if(ss==1) {
-            text += "second";    
-        }
-        else {
-            text += "seconds";    
+        if (ss == 1) {
+            text += "second";
+        } else {
+            text += "seconds";
         }
     }
 
@@ -60,7 +57,7 @@ function IntervalHandler() {
         })
     }
 
-    document.getElementById("hh").textContent = hh;
-    document.getElementById("mm").textContent = mm;
-    document.getElementById("ss").textContent = ss;
+    document.getElementById("hh").textContent = hh.toString().padStart(2,'0');
+    document.getElementById("mm").textContent = mm.toString().padStart(2,'0');
+    document.getElementById("ss").textContent = ss.toString().padStart(2,'0');
 }
