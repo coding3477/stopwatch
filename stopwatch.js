@@ -90,4 +90,8 @@ document.getElementById("reset").addEventListener("click", function () {
     document.getElementById("hh").textContent = "00";
     document.getElementById("mm").textContent = "00";
     document.getElementById("ss").textContent = "00";
+
+    hh = 0;
+    mm = 0;
+    ss = 0;
 });
